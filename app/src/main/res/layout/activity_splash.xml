@@ -4,6 +4,16 @@
     android:layout_height="match_parent"
     android:background="@color/blue_primary">
 
+    <ImageView
+        android:id="@+id/topImage"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
+        android:src="@drawable/collegelogo"
+        android:contentDescription="@string/app_name" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
