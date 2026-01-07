@@ -6,23 +6,45 @@
     android:orientation="vertical"
     android:background="?android:attr/windowBackground">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
+    <LinearLayout
+        android:id="@+id/customToolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="100dp"
+        android:paddingTop="20dp"
         android:background="?attr/colorPrimary"
-        app:titleTextColor="?attr/colorOnPrimary"
-        app:navigationIcon="@drawable/ic_back_arrow">
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_back_arrow"
+            app:tint="?attr/colorOnPrimary"/>
+
+        <TextView
+            android:id="@+id/toolbarTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="15dp"
+            android:text="@string/vehicle_dashboard"
+            android:textColor="?attr/colorOnPrimary"
+            android:textSize="20sp"
+            style="@style/TextAppearance.Material3.HeadlineSmall"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/themeToggleButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginEnd="8dp"
-            android:text="Theme"
-            style="@style/Widget.Material3.Button.TextButton" />
-    </com.google.android.material.appbar.MaterialToolbar>
+            style="@style/Widget.Material3.Button.TextButton"
+            app:iconTint="?attr/colorOnPrimary"
+            android:textColor="?attr/colorOnPrimary"/>
+
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
