@@ -16,4 +16,20 @@ public class DataManager {
     public DataManager(Context context) {
         prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
     }
+    public void saveVehicles(List<Vehicle> vehicles) {
+        JSONArray jsonArray = new JSONArray();
+        for (Vehicle vehicle : vehicles) {
+            JSONObject obj = new JSONObject();
+            try {
+                obj.put("vehicleNumber", vehicle.getVehicleNumber());
+                obj.put("vehicleType", vehicle.getVehicleType());
+                obj.put("brand", vehicle.getBrand());
+                obj.put("model", vehicle.getModel());
+                jsonArray.put(obj);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        prefs.edit().putString(KEY_VEHICLES, jsonArray.toString()).apply();
+    }
 }
