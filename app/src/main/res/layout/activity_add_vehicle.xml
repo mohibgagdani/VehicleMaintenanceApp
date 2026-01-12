@@ -26,18 +26,22 @@
             app:tint="?attr/colorOnPrimary"/>
 
         <TextView
+            android:id="@+id/toolbarTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:text="@string/add_service"
+            android:text="@string/add_vehicle"
             android:textColor="?attr/colorOnPrimary"
             android:textSize="20sp"
-            style="@style/TextAppearance.Material3.HeadlineSmall" />
+            style="@style/TextAppearance.Material3.HeadlineSmall"
+            />
+
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -48,26 +52,11 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/service_date"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/serviceDateInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:focusable="false"
-                    android:inputType="none" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:hint="@string/service_type"
+                android:hint="@string/vehicle_type"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
                 <AutoCompleteTextView
-                    android:id="@+id/serviceTypeSpinner"
+                    android:id="@+id/vehicleTypeSpinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="none" />
@@ -77,29 +66,42 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="@string/service_cost"
+                android:hint="@string/vehicle_number"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/serviceCostInput"
+                    android:id="@+id/vehicleNumberInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal" />
+                    android:inputType="textCapCharacters" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="@string/notes"
+                android:hint="@string/brand"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/notesInput"
+                    android:id="@+id/brandInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textMultiLine"
-                    android:minLines="3" />
+                    android:inputType="textCapWords" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="@string/model"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/modelInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textCapWords" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
