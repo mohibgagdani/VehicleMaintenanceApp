@@ -51,4 +51,20 @@ public class DataManager {
         }
         return vehicles;
     }
+    public void saveServiceRecords(String vehicleNumber, List<ServiceRecord> records) {
+        JSONArray jsonArray = new JSONArray();
+        for (ServiceRecord record : records) {
+            JSONObject obj = new JSONObject();
+            try {
+                obj.put("date", record.getDate());
+                obj.put("type", record.getType());
+                obj.put("cost", record.getCost());
+                obj.put("notes", record.getNotes());
+                jsonArray.put(obj);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        prefs.edit().putString("service_" + vehicleNumber, jsonArray.toString()).apply();
+    }
 }
