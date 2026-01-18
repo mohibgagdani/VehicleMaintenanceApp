@@ -99,6 +99,7 @@ public class DataManager {
             }
         }
         prefs.edit().putString("fuel_" + vehicleNumber, jsonArray.toString()).apply();
+    }
         public List<ServiceRecord> getServiceRecords(String vehicleNumber) {
             List<ServiceRecord> records = new ArrayList<>();
             String json = prefs.getString("service_" + vehicleNumber, "[]");
@@ -118,5 +119,37 @@ public class DataManager {
             }
             return records;
         }
+    public void saveEmergencyContacts(String vehicleNumber, List<EmergencyContact> contacts) {
+        JSONArray jsonArray = new JSONArray();
+        for (EmergencyContact contact : contacts) {
+            JSONObject obj = new JSONObject();
+            try {
+                obj.put("name", contact.getName());
+                obj.put("phone", contact.getPhone());
+                jsonArray.put(obj);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        prefs.edit().putString("contacts_" + vehicleNumber, jsonArray.toString()).apply();
     }
-}
+
+    public List<EmergencyContact> getEmergencyContacts(String vehicleNumber) {
+        List<EmergencyContact> contacts = new ArrayList<>();
+        String json = prefs.getString("contacts_" + vehicleNumber, "[]");
+        try {
+            JSONArray jsonArray = new JSONArray(json);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject obj = jsonArray.getJSONObject(i);
+                contacts.add(new EmergencyContact(
+                        obj.getString("name"),
+                        obj.getString("phone")
+                ));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return contacts;
+    }
+
+    }
