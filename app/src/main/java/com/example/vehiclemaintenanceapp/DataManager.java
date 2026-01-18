@@ -51,4 +51,72 @@ public class DataManager {
         }
         return vehicles;
     }
+    public void saveServiceRecords(String vehicleNumber, List<ServiceRecord> records) {
+        JSONArray jsonArray = new JSONArray();
+        for (ServiceRecord record : records) {
+            JSONObject obj = new JSONObject();
+            try {
+                obj.put("date", record.getDate());
+                obj.put("type", record.getType());
+                obj.put("cost", record.getCost());
+                obj.put("notes", record.getNotes());
+                jsonArray.put(obj);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        prefs.edit().putString("service_" + vehicleNumber, jsonArray.toString()).apply();
+    }
+    public List<ServiceRecord> getServiceRecords(String vehicleNumber) {
+        List<ServiceRecord> records = new ArrayList<>();
+        String json = prefs.getString("service_" + vehicleNumber, "[]");
+        try {
+            JSONArray jsonArray = new JSONArray(json);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject obj = jsonArray.getJSONObject(i);
+                records.add(new ServiceRecord(
+                        obj.getString("date"),
+                        obj.getString("type"),
+                        obj.getString("cost"),
+                        obj.getString("notes")
+                ));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return records;
+    }
+    public void saveFuelRecords(String vehicleNumber, List<FuelRecord> records) {
+        JSONArray jsonArray = new JSONArray();
+        for (FuelRecord record : records) {
+            JSONObject obj = new JSONObject();
+            try {
+                obj.put("date", record.getDate());
+                obj.put("cost", record.getCost());
+                jsonArray.put(obj);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        prefs.edit().putString("fuel_" + vehicleNumber, jsonArray.toString()).apply();
+        public List<ServiceRecord> getServiceRecords(String vehicleNumber) {
+            List<ServiceRecord> records = new ArrayList<>();
+            String json = prefs.getString("service_" + vehicleNumber, "[]");
+            try {
+                JSONArray jsonArray = new JSONArray(json);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject obj = jsonArray.getJSONObject(i);
+                    records.add(new ServiceRecord(
+                            obj.getString("date"),
+                            obj.getString("type"),
+                            obj.getString("cost"),
+                            obj.getString("notes")
+                    ));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return records;
+        }
+    }
 }
