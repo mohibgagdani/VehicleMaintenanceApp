@@ -32,4 +32,39 @@ public class DataManager {
         }
         prefs.edit().putString(KEY_VEHICLES, jsonArray.toString()).apply();
     }
+    public List<Vehicle> getVehicles() {
+        List<Vehicle> vehicles = new ArrayList<>();
+        String json = prefs.getString(KEY_VEHICLES, "[]");
+        try {
+            JSONArray jsonArray = new JSONArray(json);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject obj = jsonArray.getJSONObject(i);
+                vehicles.add(new Vehicle(
+                        obj.getString("vehicleNumber"),
+                        obj.getString("vehicleType"),
+                        obj.getString("brand"),
+                        obj.getString("model")
+                ));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return vehicles;
+    }
+    public void saveServiceRecords(String vehicleNumber, List<ServiceRecord> records) {
+        JSONArray jsonArray = new JSONArray();
+        for (ServiceRecord record : records) {
+            JSONObject obj = new JSONObject();
+            try {
+                obj.put("date", record.getDate());
+                obj.put("type", record.getType());
+                obj.put("cost", record.getCost());
+                obj.put("notes", record.getNotes());
+                jsonArray.put(obj);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        prefs.edit().putString("service_" + vehicleNumber, jsonArray.toString()).apply();
+    }
 }
