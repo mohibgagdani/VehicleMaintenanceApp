@@ -99,5 +99,24 @@ public class DataManager {
             }
         }
         prefs.edit().putString("fuel_" + vehicleNumber, jsonArray.toString()).apply();
+        public List<ServiceRecord> getServiceRecords(String vehicleNumber) {
+            List<ServiceRecord> records = new ArrayList<>();
+            String json = prefs.getString("service_" + vehicleNumber, "[]");
+            try {
+                JSONArray jsonArray = new JSONArray(json);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject obj = jsonArray.getJSONObject(i);
+                    records.add(new ServiceRecord(
+                            obj.getString("date"),
+                            obj.getString("type"),
+                            obj.getString("cost"),
+                            obj.getString("notes")
+                    ));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return records;
+        }
     }
 }
