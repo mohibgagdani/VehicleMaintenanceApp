@@ -151,5 +151,30 @@ public class DataManager {
         }
         return contacts;
     }
-
+    public void saveDocumentData(String vehicleNumber, String key, String value) {
+        prefs.edit().putString("doc_" + vehicleNumber + "_" + key, value).apply();
     }
+
+    public String getDocumentData(String vehicleNumber, String key) {
+        return prefs.getString("doc_" + vehicleNumber + "_" + key, "");
+    }
+
+    public void saveReminderData(String vehicleNumber, String key, String value) {
+        prefs.edit().putString("reminder_" + vehicleNumber + "_" + key, value).apply();
+    }
+
+    public String getReminderData(String vehicleNumber, String key) {
+        return prefs.getString("reminder_" + vehicleNumber + "_" + key, "");
+    }
+
+    public void saveTheme(boolean isDarkMode) {
+        prefs.edit().putBoolean(KEY_THEME, isDarkMode).apply();
+    }
+
+    public boolean isDarkMode() {
+        return prefs.getBoolean(KEY_THEME, false);
+    }
+
+}
+
+
